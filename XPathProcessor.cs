@@ -1,6 +1,10 @@
 using Microsoft.Extensions.Configuration;
 using System.IO.Compression;
 using System.Text;
+using System.Xml;
+using Microsoft.Extensions.Configuration;
+using System.IO.Compression;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 
@@ -199,7 +203,8 @@ namespace XDoc
         {
             try
             {
-                using (FileStream fs = new FileStream(FileName, FileMode.Create))
+                Directory.CreateDirectory(Path.GetDirectoryName(FileName)!);
+                using (FileStream fs = new FileStream(outputDocxPath, FileMode.Create))
                 using (ZipArchive originalArchive = ZipFile.Open(originalDocxPath, ZipArchiveMode.Read))
                 using (ZipArchive newArchive = new ZipArchive(fs, ZipArchiveMode.Create))
                 {
